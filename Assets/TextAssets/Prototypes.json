@@ -1,0 +1,48 @@
+{
+  "Prototypes": [
+    {
+      "ID": 0,
+      "Weight": 1,
+      "RendererPath": "",
+      "Sockets": [
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF"
+      ]
+    },
+    {
+      "ID": 1,
+      "Weight": 1,
+      "RendererPath": "",
+      "Sockets": [
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF"
+      ]
+    },
+    {
+      "ID": 2,
+      "Weight": 1,
+      "RendererPath": "",
+      "Sockets": [
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF"
+      ]
+    },
+    {
+      "ID": 3,
+      "Weight": 1,
+      "RendererPath": "",
+      "Sockets": [
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF",
+        "#FFFFFF"
+      ]
+    }
+  ]
+}
