@@ -1,7 +1,7 @@
 {
 "companyName": "DefaultCompany",
-"productName": "WFC",
-"productVersion": "0.1",
+"productName": "GitHub-WFC",
+"productVersion": "1.0",
 "dataUrl": "Build.data.unityweb",
 "wasmCodeUrl": "Build.wasm.code.unityweb",
 "wasmFrameworkUrl": "Build.wasm.framework.unityweb",
