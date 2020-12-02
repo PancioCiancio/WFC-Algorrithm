@@ -20,7 +20,7 @@ public class WFCAlgorithm
 
     int[,] m_WaveFunctionCollapseGrid = null;
     bool m_IsFullyCollapsed = false;
-    int m_LimitIteration = 6000;
+    int m_LimitIteration = 10000;
     int m_IterationCount = 0;
 
     // Determines how we move onto the abstract grid.
@@ -44,6 +44,7 @@ public class WFCAlgorithm
     float m_StartingLogWeight;
     float m_StartingEntropy;
 
+    int m_LogBase = 10;
     System.Random m_Random;
 
 
@@ -75,13 +76,18 @@ public class WFCAlgorithm
             - 1                     // Move left
         };
 
+        foreach (Prototype proto in m_Prototypes.Values)
+        {
+            m_LogBase = m_LogBase < proto.Weight ? m_LogBase = Mathf.RoundToInt(proto.Weight + 0.5f) : m_LogBase;
+        }
+
         // Define Weights
         foreach (Prototype proto in m_Prototypes.Values)
         {
             m_StartingWeight    += proto.Weight;
-            m_StartingLogWeight += proto.Weight * Mathf.Log(proto.Weight);
+            m_StartingLogWeight += proto.Weight * Mathf.Log(proto.Weight, m_LogBase);
         }
-        m_StartingEntropy += Mathf.Log(m_StartingWeight) - (m_StartingLogWeight / m_StartingWeight);    // Shannon Entropy
+        m_StartingEntropy += Mathf.Log(m_StartingWeight, m_LogBase) - (m_StartingLogWeight / m_StartingWeight);    // Shannon Entropy
 
         m_Weights       = new float[m_Width * m_Height];
         m_LogWeights    = new float[m_Width * m_Height];
@@ -138,6 +144,8 @@ public class WFCAlgorithm
 
         if (m_IsFullyCollapsed) 
             Debug.Log("[WFC Algorithm] Log: Algorithm end successfully");
+        else
+            Debug.Log("[WFC Algorithm] Error:");
 
         return m_IsFullyCollapsed;
     }
@@ -259,8 +267,8 @@ public class WFCAlgorithm
                 iteratedProtoID != -1)
             {
                 m_Weights   [lowestCellEntropy] -= m_Prototypes[iteratedProtoID].Weight;
-                m_LogWeights[lowestCellEntropy] -= m_Prototypes[iteratedProtoID].Weight * Mathf.Log(m_Prototypes[iteratedProtoID].Weight);
-                m_Entropy   [lowestCellEntropy]  = Mathf.Log(m_Weights[lowestCellEntropy]) - (m_LogWeights[lowestCellEntropy] / m_Weights[lowestCellEntropy]); // Shannon Entropy
+                m_LogWeights[lowestCellEntropy] -= m_Prototypes[iteratedProtoID].Weight * Mathf.Log(m_Prototypes[iteratedProtoID].Weight, m_LogBase);
+                m_Entropy   [lowestCellEntropy]  = Mathf.Log(m_Weights[lowestCellEntropy], m_LogBase) - (m_LogWeights[lowestCellEntropy] / m_Weights[lowestCellEntropy]); // Shannon Entropy
 
                 m_WaveFunctionCollapseGrid[lowestCellEntropy, i] = -1;
             }
@@ -318,8 +326,8 @@ public class WFCAlgorithm
             if (iteratedProtoID == id)
             {
                 m_Weights   [otherindexing] -= m_Prototypes[id].Weight;
-                m_LogWeights[otherindexing] -= m_Prototypes[id].Weight * Mathf.Log(m_Prototypes[id].Weight);
-                m_Entropy   [otherindexing]  = Mathf.Log(m_Weights[otherindexing]) - (m_LogWeights[otherindexing] / m_Weights[otherindexing]); // Shannon Entropy
+                m_LogWeights[otherindexing] -= m_Prototypes[id].Weight * Mathf.Log(m_Prototypes[id].Weight, m_LogBase);
+                m_Entropy   [otherindexing]  = Mathf.Log(m_Weights[otherindexing], m_LogBase) - (m_LogWeights[otherindexing] / m_Weights[otherindexing]); // Shannon Entropy
 
                 m_WaveFunctionCollapseGrid[otherindexing, i] = -1;
                 break;
