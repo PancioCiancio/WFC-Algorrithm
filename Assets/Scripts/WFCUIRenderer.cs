@@ -16,6 +16,8 @@ public class WFCUIRenderer : WFCRenderOutput
 
         base.WFCStart();
 
+        if (m_OutputPrototypes == null) return;
+
         for (int i = 0; i < m_OutputPrototypes.Length; i++)
         {
             RenderedGrid[i].sprite = Resources.Load<Sprite>(m_OutputPrototypes[i].RenderePath);

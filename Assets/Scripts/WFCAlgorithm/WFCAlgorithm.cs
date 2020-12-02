@@ -44,7 +44,7 @@ public class WFCAlgorithm
     float m_StartingLogWeight;
     float m_StartingEntropy;
 
-    int m_LogBase = 10;
+    int m_LogBase = 0;
     System.Random m_Random;
 
 
@@ -78,7 +78,7 @@ public class WFCAlgorithm
 
         foreach (Prototype proto in m_Prototypes.Values)
         {
-            m_LogBase = m_LogBase < proto.Weight ? m_LogBase = Mathf.RoundToInt(proto.Weight + 0.5f) : m_LogBase;
+            m_LogBase = m_LogBase < proto.Weight ? m_LogBase = Mathf.RoundToInt(proto.Weight + 0.4999f) : m_LogBase;
         }
 
         // Define Weights
