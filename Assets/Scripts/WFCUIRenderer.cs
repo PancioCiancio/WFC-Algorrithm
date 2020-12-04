@@ -19,10 +19,13 @@ public class WFCUIRenderer : WFCRenderOutput
 
         if (m_OutputPrototypes == null) return;
 
+        DOTween.Clear();
+
         for (int i = 0; i < m_OutputPrototypes.Length; i++)
         {
             RenderedGrid[i].sprite = Resources.Load<Sprite>(m_OutputPrototypes[i].RenderePath);
             RenderedGrid[i].useSpriteMesh = true;
+            RenderedGrid[i].color = new Color(1, 1, 1, 0);
         }
 
         int j = 0;
