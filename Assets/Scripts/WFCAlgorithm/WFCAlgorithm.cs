@@ -47,6 +47,11 @@ public class WFCAlgorithm
     int m_LogBase = 0;
     System.Random m_Random;
 
+    /// <summary>
+    /// Used to read the right sequence of collapsed tile.
+    /// </summary>
+    public List<int> CollapseSequenceIndex = new List<int>();
+
 
     /// <summary>
     /// Constructor. Initialize all values.
@@ -273,6 +278,9 @@ public class WFCAlgorithm
                 m_WaveFunctionCollapseGrid[lowestCellEntropy, i] = -1;
             }
         }
+
+        if (!CollapseSequenceIndex.Contains(lowestCellEntropy))
+            CollapseSequenceIndex.Add(lowestCellEntropy);
     }
 
     /// <summary>
@@ -332,6 +340,9 @@ public class WFCAlgorithm
                 m_WaveFunctionCollapseGrid[otherindexing, i] = -1;
                 break;
             }
+
+            if (!CollapseSequenceIndex.Contains(otherindexing))
+                CollapseSequenceIndex.Add(otherindexing);
         }
     }
 

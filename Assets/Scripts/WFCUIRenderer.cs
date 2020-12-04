@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class WFCUIRenderer : WFCRenderOutput
 {
@@ -22,6 +23,17 @@ public class WFCUIRenderer : WFCRenderOutput
         {
             RenderedGrid[i].sprite = Resources.Load<Sprite>(m_OutputPrototypes[i].RenderePath);
             RenderedGrid[i].useSpriteMesh = true;
+        }
+
+        int j = 0;
+        RenderedGrid[m_WFCAlgorithm.CollapseSequenceIndex[j++]].DOFade(1.0f, 0.12f).OnComplete(() => CheckTeweening(j));
+    }
+
+    void CheckTeweening(int index)
+    {
+        if (index < m_WFCAlgorithm.CollapseSequenceIndex.Count)
+        {
+            RenderedGrid[m_WFCAlgorithm.CollapseSequenceIndex[index++]].DOFade(1.0f, 0.12f).OnComplete(() => CheckTeweening(index));
         }
     }
 
